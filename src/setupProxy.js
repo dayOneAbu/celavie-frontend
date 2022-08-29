@@ -4,7 +4,10 @@ module.exports = function (app) {
   app.use(
     "/api",
     createProxyMiddleware({
-      target: "http://localhost:5000",
+      target:
+        process.env === "production"
+          ? "https://celavie-food.herokuapp.com/"
+          : "http://localhost:5000",
       changeOrigin: true,
     })
   );
